@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		.targets {
+			height: 100px;
+			width: 100px;
+			position: absolute;
+		}
+	</style>
+</head>
+<body style="background-image: url(1622136604_12-oir_mobi-p-pole-boya-priroda-krasivo-foto-13.jpg);">
+	<div style="background-image: url(tekstura-pochva-zemlya-pesok.jpg); height: 30px; width: 1700px; position: absolute; top: 700px;"></div>
+
+	<div style="background-image: url(tekstura-pochva-zemlya-pesok.jpg); height: 30px; width: 1700px; position: absolute; top: 625px;"></div>
+
+	<div style="background-image: url(tekstura-pochva-zemlya-pesok.jpg); height: 30px; width: 1700px; position: absolute; top: 550px;"></div>
+
+	<button class="btn" style="background-color: black; color: white; height: 50px; width: 70px;">Начать игру</button>
+	<div class="" style="width: 200px; height: 330px;">
+	    <h1 class="text-white" style="font-size: 30px;">Уничтожь всех вражеских танков</h1>
+	    <h1 class="text-white" style="font-size: 40px;">Мои очки</h1>
+	    <h1 class="text-white text-center text1"><span class="text1">0</span></h1>
+    </div>
+
+<script type="text/javascript">
+	let bullet = 0
+	let number = 0;
+	let button = document.querySelector(".btn")
+
+	let randomizer = function(arg) {
+		let random = Math.random() * arg;
+		let round = Math.round(random)
+		return round 
+	}
+
+	let topPosition = [650,575,500];
+
+	let createEnemies = function() {
+	    let enemy = document.createElement("div");
+	    document.body.appendChild(enemy); 
+	    enemy.classList.add("targets");
+	    enemy.style.left = randomizer(900) + "px";
+	    enemy.style.top = topPosition[randomizer(2)] + "px";
+
+	    if(randomizer(2)==0){
+	    	enemy.style.backgroundImage = "url(V_14_158.png)";
+	    	enemy.style.backgroundSize = "100% 90%";
+	    	enemy.name = "good"
+	    }
+
+	    if(randomizer(2)==1){
+	    	enemy.style.backgroundImage = "url(G04_PzVI_Tiger_I.53d722b4.png)";
+	    	enemy.style.backgroundSize = "100% 90%";
+	    	enemy.name = "good2"
+	    }
+
+	    if(randomizer(2)==1){
+	    	enemy.style.backgroundImage = "url(T-34-85.png)";
+	    	enemy.style.backgroundSize = "130% 120%";
+	    	enemy.name = "bad"
+	    }
+
+	    enemy.onclick = function() {
+	    	document.querySelector('.text1').innerHTML = bullet;
+	    	enemy.style.display = "none";
+	    	if (enemy.name=="good") {
+	    		bullet = bullet + 2 ;
+	    	}
+	    	if (enemy.name=="good2") {
+	    		bullet = bullet + 1 ;
+	    	}
+	    	if (enemy.name=="bad") {
+	    		bullet = bullet - 3;
+	    	}
+	    }
+	}
+
+	button.onclick = function() {
+		button.style.display = "none";
+		let interval = setInterval(createEnemies,500);
+
+	    let stopGame = function() {
+		    clearInterval(interval);
+
+	    }
+	    setTimeout(stopGame,10000);
+	}
+
+</script>
+</body>
+</html>
